@@ -1,0 +1,9 @@
+ name: Corpses
+ main: com.gmail.fitostpm.corpses.MainClass
+ version: 1.0
+ description: This plugin makes entities leave their corpses after their deaths.
+ author: Fitos 
+ commands:
+   getstaff:
+     description: Gives count of type-of-staff to player. If player is missing it gives it to sender. If count is missing it gives 1.
+     usage: /<command> [player] [type-of-staff] [count]
