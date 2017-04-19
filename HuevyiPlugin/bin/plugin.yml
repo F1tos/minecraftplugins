@@ -1,0 +1,5 @@
+ name: RepairPenalties
+ main: RepairPenalties.mainClass
+ version: 1.0
+ description: This plugin forbid to repair something.
+ author: Fitos

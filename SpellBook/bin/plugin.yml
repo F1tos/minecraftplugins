@@ -1,0 +1,9 @@
+ name: SpellBook
+ main: com.gmail.fitostpm.spellbook.MainClass
+ version: 1.0
+ description: This plugin adds spell book to your server.
+ author: Fitos 
+ commands:
+   givesb:
+     description: Gives spell book to specified player. If player is missing spell book will be given to sender
+     usage: /<command> [player]

@@ -1,0 +1,12 @@
+name: Socketing
+main: socketing.mainClass
+version: 1.0
+description: Adds to your server socketing mechanics.
+author: Fitos
+commands:
+	addsocket:
+		description: adds socket to item in your hand
+		usage: /<command>
+	addgem:
+		description: inserts gem in empty socket to item in your hand
+		usage: /<command>

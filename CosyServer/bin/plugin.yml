@@ -1,0 +1,5 @@
+name: CosyServer
+main: cosyserver.mainClass
+version: 1.0
+description: This plugin adds to your server some helpful stuff.
+author: Fitos

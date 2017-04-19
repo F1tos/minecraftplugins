@@ -1,0 +1,18 @@
+ name: Auras
+ version: 1.0
+ main: auras.mainClass
+ description: This plugin adds to your server socketing mechanics.
+ author: Fitos
+ commands:
+   addaura:
+     description: Adds aura.
+     usage: /<command> [particle] [type] <parameters>
+   removeauras:
+     description: Remove all auras.
+     usage: /<command>
+   allparticles:
+     description: Shows all particles.
+     usage: /<command>
+   alltypes:
+     description: Show all types.
+     usage: /<command>

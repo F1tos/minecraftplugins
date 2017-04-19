@@ -1,0 +1,3 @@
+name: FirstPlugin
+main: firstplugin.mainClass
+version: 1.0

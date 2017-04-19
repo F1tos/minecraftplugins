@@ -1,0 +1,12 @@
+ name: ExtraWeapons
+ main: com.gmail.fitostpm.extraweapons.MainClass
+ version: 1.0
+ description: This plugin adds to your server new weapons.
+ author: Fitos 
+ commands:
+   grenade:
+     description: Gives number of grenades.
+     usage: /<command> [player] [count]
+   web:
+     description: Gives number of snare webs.
+     usage: /<command> [player] [count]
