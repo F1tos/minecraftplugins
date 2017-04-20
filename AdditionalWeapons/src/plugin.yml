@@ -1,0 +1,9 @@
+ name: AdditionalWeapons
+ main: additionalweapons.mainClass
+ version: 1.0
+ description: This plugin adds to your server new weapons.
+ author: Fitos 
+ commands:
+   grenade:
+     description: Gives number of grenades.
+     usage: /<command> [player] [count]

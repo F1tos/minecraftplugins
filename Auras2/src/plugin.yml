@@ -1,0 +1,21 @@
+ name: Auras
+ version: 1.0
+ main: com.gmail.fitostpm.auras.MainClass
+ description: This plugin allows you to create effects on players.
+ author: Fitos
+ commands:
+   addaura:
+     description: Adds aura.
+     usage: /<command> <player> <effect_type> <particle> <effect_parameters>
+   addaurac:
+     description: Adds colored aura. Type /alltypes to know all effect types and their parameters
+     usage: /<command> <player> <effect_type> <particle> <effect_parameters>
+   rmaura:
+     description: Removes specific effect. Type /displayeffects to know ids of effects
+     usage: /<command> [player] <effect_id>
+   displayauras:
+     description: Displays effects that you currently have and their ids.
+     usage: /<command> [player]
+   displayauras:
+     description: Displays all particles names.
+     usage: /<command>

@@ -1,0 +1,9 @@
+ name: Feather Knife
+ main: com.gmail.fitostpm.featherknife.MainClass
+ version: 1.1.4
+ description: Feather Knife.
+ author: Fitos 
+ commands:
+   giveknife:
+     description: Gives feather knife to player
+     usage: /<command> [player]

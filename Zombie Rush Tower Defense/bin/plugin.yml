@@ -1,0 +1,9 @@
+ name: Simple Tower Defense
+ main: com.gmail.fitostpm.zrtd.MainClass
+ version: 1.0
+ description: This plugin adds mini-game Tower Defense to your server.
+ author: Fitos
+ commands:
+   dsnew:
+     description: Creates new game.
+     usage: /<command> [Name]

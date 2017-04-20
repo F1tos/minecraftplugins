@@ -1,0 +1,21 @@
+ name: Staffs
+ main: com.gmail.fitostpm.staffs.MainClass
+ version: 1.0.2
+ description: This plugin adds staff to your server.
+ author: Fitos 
+ commands:
+   getstaff:
+     description: Gives count of type-of-staff to player. If player is missing it gives it to sender. If count is missing it gives 1.
+     usage: /<command> [player] [type-of-staff] [count]
+   repairstaff:
+     description: Repair staff in your hand
+     usage: /<command>
+   staffsinfo:
+     description: Gives you book with all information about staffs.
+     usage: /<command>
+   screload:
+     description: Reload configurations.
+     usage: /<command>
+   enchantstaff:
+     description: Enchants staff in your hand.
+     usage: /<command> [enchantment] [level]

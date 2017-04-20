@@ -1,0 +1,21 @@
+ name: Socketing
+ main: socketing.mainClass
+ version: 1.0
+ description: This plugin adds to your server socketing mechanics.
+ author: Fitos
+ commands:
+   addsocket:
+     description: Adds empty socket to item in your hand.
+     usage: /<command>
+   insertgem:
+     description: Inserts gem in empty socket of item in your hand.
+     usage: /<command>
+   giveall:
+     description: Gives all needed stuff.
+     usage: /<command> [player]
+   givegem:
+     description: Gives gem.
+     usage: /<command> [player] [gem] [count]
+   givechisel:
+     description: Gives chisel.
+     usage: /<command> [player] [count]

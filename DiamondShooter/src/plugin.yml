@@ -1,0 +1,48 @@
+ name: DiamondShooter
+ main: com.gmail.fitostpm.diamondshooter.MainClass
+ version: 1.0
+ description: This plugin adds mini-game Dianomd Shooter to your server.
+ author: Fitos
+ commands:
+   dsnew:
+     description: Creates new game.
+     usage: /<command> [Name]
+   dsaddplayer:
+     description: Adds player to the game.
+     usage: /<command> [Name of game] [Player]
+   dsremoveplayer:
+     description: Removes player from the game.
+     usage: /<command> [Name of game] [Player]
+   dsvote:
+     description: Vote for starting the game.
+     usage: /<command>
+   dssetspawn:
+     description: Creates spawn for game at sender's postition.
+     usage: /<command> [Name of game]
+   dssetscore:
+     description: Set the number of points needed for win.
+     usage: /<command> [Name of game] [Score]
+   dssetarenaradius:
+     description: Set the place that players will be teleported in after the game.
+     usage: /<command> [Name of game] [ArenaRadius]
+   dssethitradius:
+     description: Set the place that players will be teleported in after the game.
+     usage: /<command> [Name of game] [HitRadius]
+   dssetlobby:
+     description: Creates lobby for game at sender's postition.
+     usage: /<command> [Name of game]
+   dssetparticles:
+     description: Set the particle that will be shown.
+     usage: /<command> [Name of game]
+   dsinfo:
+     description: Show info about game.
+     usage: /<command> [Name of game]
+   dsaccept:
+     description: Agree to start game.
+     usage: /<command>
+   dsreload:
+     description: Reloads configuration files.
+     usage: /<command>
+   dssave:
+     description: Saves game into plugin directory.
+     usage: /<command> [Name of game]

@@ -1,0 +1,5 @@
+ name: pftest
+ main: pftest.MainClass
+ version: 1.0
+ description: This plugin adds to your server new weapons.
+ author: Fitos 

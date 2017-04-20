@@ -9,10 +9,10 @@
 # BlueJ files
 *.ctxt
 
-# Mobile Tools for Java
+# Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files
+# Package Files #
 *.jar
 *.war
 *.ear
@@ -20,5 +20,9 @@
 *.tar.gz
 *.rar
 
+<<<<<<< HEAD
 # vm crash logs
+=======
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+>>>>>>> origin/master
 hs_err_pid*
