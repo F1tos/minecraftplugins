@@ -11,14 +11,19 @@ import org.bukkit.inventory.ItemStack;
 
 import com.gmail.fitostpm.spellbook.MainClass;
 import com.gmail.fitostpm.spellbook.spells.EnumSpell;
+import com.gmail.fitostpm.spellbook.spells.PointTargetSpell;
 import com.gmail.fitostpm.spellbook.spells.Spell;
+import com.gmail.fitostpm.spellbook.spells.UnitTargetSpell;
 import com.gmail.fitostpm.spellbook.targets.Target;
 import com.gmail.fitostpm.spellbook.tasks.TargetSelector;
+import com.gmail.fitostpm.spellbook.tasks.TrajectorySelector;
 
 
+/*
+ * choosing spell
+ */
 public class InventoryEventsListeners implements Listener
 {
-
 	@EventHandler
 	public void onItemClick(InventoryClickEvent event)
 	{
@@ -34,25 +39,38 @@ public class InventoryEventsListeners implements Listener
 				Spell spell = EnumSpell.getByName(item.getItemMeta().getDisplayName()).getSpell();
 
 				player.closeInventory();
-				if(spell.CanSelfTarget && event.getClick().equals(ClickType.SHIFT_LEFT))
+				
+				if(spell instanceof UnitTargetSpell)
 				{
-					spell.Behavior(player, player);
-					player.getInventory().remove(event.getCurrentItem());
-					MainClass.SpellChooseDialog.remove(player);
-				}
-				else
-				{
-					Target[] targets = spell.selectTargets(player);
-					if(targets.length > 0)
+					UnitTargetSpell utspell = (UnitTargetSpell) spell;
+
+					if(utspell.CanSelfTarget && event.getClick().equals(ClickType.SHIFT_LEFT))
 					{
-						double playerYaw = player.getLocation().getYaw();
-						if(playerYaw < 0 )
-							playerYaw += 360;
-						TargetSelector ts = new TargetSelector(player, targets,
-								getLowestYawDifference(targets, playerYaw), spell);
-						ts.setTaskId(Bukkit.getScheduler().scheduleSyncRepeatingTask(MainClass.Instance, ts, 0, 1));
-						MainClass.CastingPlayers.put(player, ts);
-					}						
+						utspell.Behavior(player, player);
+						player.getInventory().remove(event.getCurrentItem());
+						MainClass.SpellChooseDialog.remove(player);
+					}
+					else
+					{
+						Target[] targets = utspell.selectTargets(player);
+						if(targets.length > 0)
+						{
+							double playerYaw = player.getLocation().getYaw();
+							if(playerYaw < 0 )
+								playerYaw += 360;
+							TargetSelector ts = new TargetSelector(player, targets,
+									getLowestYawDifference(targets, playerYaw), utspell);
+							ts.setTaskId(Bukkit.getScheduler().scheduleSyncRepeatingTask(MainClass.Instance, ts, 0, 1));
+							MainClass.CastingPlayers.put(player, ts);
+						}						
+					}					
+				}
+				else if(spell instanceof PointTargetSpell)
+				{
+					PointTargetSpell ptspell = (PointTargetSpell) spell;
+					TrajectorySelector ts = new TrajectorySelector(player, ptspell);
+					ts.setTaskId(Bukkit.getScheduler().scheduleSyncRepeatingTask(MainClass.Instance, ts, 0, 1));
+					MainClass.CastingPlayers.put(player, ts);
 				}
 			}
 		}

@@ -8,22 +8,20 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.gmail.fitostpm.spellbook.MainClass;
-import com.gmail.fitostpm.spellbook.spells.Spell;
+import com.gmail.fitostpm.spellbook.spells.UnitTargetSpell;
 import com.gmail.fitostpm.spellbook.targets.Target;
 
 import net.minecraft.server.v1_11_R1.ChatComponentText;
 import net.minecraft.server.v1_11_R1.PacketPlayOutChat;
 import net.minecraft.server.v1_11_R1.PacketPlayOutTitle;
 
-public class TargetSelector implements Runnable 
+public class TargetSelector extends Selector implements Runnable 
 {
 	private Player Caster;
 	private Target[] Targets;
 	private int CurrentTargetIndex;
-	private int TaskId;
-	private Spell CastingSpell;
 	
-	public TargetSelector(Player caster, Target[] targets, int curTargetIndex, Spell spell)
+	public TargetSelector(Player caster, Target[] targets, int curTargetIndex, UnitTargetSpell spell)
 	{
 		Caster = caster;
 		Targets = targets;
@@ -62,13 +60,15 @@ public class TargetSelector implements Runnable
 
 	}
 	
+	@Override
 	public void Cast()
 	{
-		CastingSpell.Behavior(Caster, Targets[CurrentTargetIndex].entity);
+		((UnitTargetSpell)CastingSpell).Behavior(Caster, Targets[CurrentTargetIndex].entity);
 		Stop();
 	}
-	
-	public void Stop()
+
+	@Override
+	public void Stop() 
 	{
 		for(Target t : Targets)
 			t.entity.setGlowing(false);
@@ -78,7 +78,7 @@ public class TargetSelector implements Runnable
 		((CraftPlayer)Caster).getHandle().playerConnection.sendPacket(new PacketPlayOutChat(
 				new ChatComponentText(""), (byte)2));
 		MainClass.CastingPlayers.remove(Caster);
-		Bukkit.getScheduler().cancelTask(TaskId);		
+		Bukkit.getScheduler().cancelTask(getTaskId());	
 	}
 	
 	public void PrevTarget()
@@ -92,14 +92,6 @@ public class TargetSelector implements Runnable
 	public void NextTarget()
 	{
 		CurrentTargetIndex = (CurrentTargetIndex + 1) % Targets.length;				
-	}
-
-	public int getTaskId() {
-		return TaskId;
-	}
-
-	public void setTaskId(int taskId) {
-		TaskId = taskId;
 	}
 
 }

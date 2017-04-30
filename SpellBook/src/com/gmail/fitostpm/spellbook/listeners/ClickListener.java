@@ -10,6 +10,9 @@ import org.bukkit.inventory.EquipmentSlot;
 import com.gmail.fitostpm.spellbook.MainClass;
 import com.gmail.fitostpm.spellbook.SpellBook;
 
+/*
+ * clicking mouse duirng casting spell
+ */
 public class ClickListener implements Listener 
 {
 	@EventHandler

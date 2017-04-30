@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 import net.minecraft.server.v1_11_R1.EnumParticle;
 import net.minecraft.server.v1_11_R1.PacketPlayOutWorldParticles;
 
-public class InstantHarmSpell extends Spell 
+public class InstantHarmSpell extends UnitTargetSpell 
 {
 	public InstantHarmSpell()
 	{

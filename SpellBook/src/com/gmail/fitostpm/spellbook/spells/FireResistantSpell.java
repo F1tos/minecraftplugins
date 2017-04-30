@@ -15,7 +15,7 @@ import com.gmail.fitostpm.spellbook.spells.effects.CommonEffect;
 
 import net.minecraft.server.v1_11_R1.EnumParticle;
 
-public class FireResistantSpell extends Spell
+public class FireResistantSpell extends UnitTargetSpell
 {
 	public FireResistantSpell()
 	{

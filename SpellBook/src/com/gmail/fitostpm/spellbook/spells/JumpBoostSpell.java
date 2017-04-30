@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 import com.gmail.fitostpm.spellbook.MainClass;
 import com.gmail.fitostpm.spellbook.spells.effects.CommonColoredEffect;
 
-public class JumpBoostSpell extends Spell
+public class JumpBoostSpell extends UnitTargetSpell
 {
 	public JumpBoostSpell()
 	{

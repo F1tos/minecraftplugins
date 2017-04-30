@@ -12,7 +12,8 @@ public enum EnumSpell
 	JUMP_BOOST(6, "jump", "Jump Boost", new JumpBoostSpell()),
 	LIGHTNING_STRIKE(7, "lightning", "Lightning Strike", new LightningStrikeSpell()),
 	POWER(8, "power", "Power", new PowerSpell()),
-	REGENERATION(9, "regen", "Regeneration", new RegenerationSpell());
+	REGENERATION(9, "regen", "Regeneration", new RegenerationSpell()),
+	FIREBALL(10, "fireball", "Fireball", new FireballSpell());
 
 	private final int Id;
 	private final String TagName;

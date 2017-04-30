@@ -17,7 +17,7 @@ import com.gmail.fitostpm.spellbook.MainClass;
 import com.gmail.fitostpm.spellbook.spells.effects.CommonColoredEffect;
 
 
-public class HasteSpell extends Spell
+public class HasteSpell extends UnitTargetSpell
 {
 	public HasteSpell()
 	{

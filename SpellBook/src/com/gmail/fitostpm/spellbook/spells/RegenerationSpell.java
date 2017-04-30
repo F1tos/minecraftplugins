@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 import com.gmail.fitostpm.spellbook.MainClass;
 import com.gmail.fitostpm.spellbook.spells.effects.CommonColoredEffect;
 
-public class RegenerationSpell extends Spell
+public class RegenerationSpell extends UnitTargetSpell
 {
 	public RegenerationSpell()
 	{

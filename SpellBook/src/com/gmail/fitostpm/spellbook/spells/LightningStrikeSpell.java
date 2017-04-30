@@ -7,7 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
-public class LightningStrikeSpell extends Spell
+public class LightningStrikeSpell extends UnitTargetSpell
 {
 	public LightningStrikeSpell()
 	{

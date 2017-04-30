@@ -17,9 +17,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.fitostpm.spellbook.listeners.ClickListener;
 import com.gmail.fitostpm.spellbook.listeners.InventoryEventsListeners;
-import com.gmail.fitostpm.spellbook.listeners.TargetSelection;
+import com.gmail.fitostpm.spellbook.listeners.SwitchTargetListener;
 import com.gmail.fitostpm.spellbook.spells.EnumSpell;
-import com.gmail.fitostpm.spellbook.tasks.TargetSelector;
+import com.gmail.fitostpm.spellbook.tasks.Selector;
 
 import net.minecraft.server.v1_11_R1.NBTTagCompound;
 
@@ -27,7 +27,7 @@ public class MainClass extends JavaPlugin
 {
 	public static MainClass Instance;
 	public static List<HumanEntity> SpellChooseDialog = new ArrayList<HumanEntity>();
-	public static HashMap<Player, TargetSelector> CastingPlayers = new HashMap<Player, TargetSelector>();
+	public static HashMap<Player, Selector> CastingPlayers = new HashMap<Player, Selector>();
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
@@ -54,7 +54,8 @@ public class MainClass extends JavaPlugin
 	public void onEnable()
 	{
 		Instance = this;
-		RegisterEvents(new ClickListener(), new InventoryEventsListeners(), new TargetSelection());
+		
+		RegisterEvents(new ClickListener(), new InventoryEventsListeners(), new SwitchTargetListener());
 	}
 
 	@Override
