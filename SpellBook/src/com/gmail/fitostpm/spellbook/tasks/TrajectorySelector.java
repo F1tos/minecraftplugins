@@ -1,5 +1,6 @@
 package com.gmail.fitostpm.spellbook.tasks;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,13 +8,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_11_R1.entity.CraftPlayer;
-import org.bukkit.entity.Creature;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 import com.gmail.fitostpm.spellbook.MainClass;
 import com.gmail.fitostpm.spellbook.spells.PointTargetSpell;
+import com.gmail.fitostpm.spellbook.util.CollectionsHelper;
+import com.gmail.fitostpm.spellbook.util.EntitySelector;
 
 import net.minecraft.server.v1_11_R1.EnumParticle;
 import net.minecraft.server.v1_11_R1.PacketPlayOutWorldParticles;
@@ -21,7 +23,7 @@ import net.minecraft.server.v1_11_R1.PacketPlayOutWorldParticles;
 public class TrajectorySelector extends Selector implements Runnable 
 {
 	private Player Caster;
-	private List<Creature> Targets;
+	private List<LivingEntity> Targets;
 	private float Red = 1;
 	private float Green = 1;
 	private float Blue = 1;
@@ -29,7 +31,7 @@ public class TrajectorySelector extends Selector implements Runnable
 	public TrajectorySelector(Player caster, PointTargetSpell spell)
 	{
 		Caster = caster;
-		Targets = new LinkedList<Creature>();
+		Targets = new LinkedList<LivingEntity>();
 		CastingSpell = spell;
 	}
 	
@@ -54,7 +56,10 @@ public class TrajectorySelector extends Selector implements Runnable
 		if(endLoc.distance(startLoc) < 50)
 		{
 			drawCircle(endLoc, 5);
-			List<Creature> newTargets = getNearbyCreatures(endLoc);
+			List<LivingEntity> newTargets = CollectionsHelper
+					.ConvertAll(EntitySelector
+					.getNearbyEntities(endLoc, LivingEntity.class, 5, 2, 5, Arrays.asList(Caster)), 
+					x -> { return (LivingEntity)x; });
 			if(newTargets.size() > 0)
 				updateTargets(newTargets);		
 			else
@@ -95,22 +100,13 @@ public class TrajectorySelector extends Selector implements Runnable
 			((CraftPlayer)Caster).getHandle().playerConnection.sendPacket(packet);
 		}
 	}
-	
-	private List<Creature> getNearbyCreatures(Location loc)
+		
+	private void updateTargets(List<LivingEntity> newTargets)
 	{
-		List<Creature> result = new LinkedList<Creature>();
-		for(Entity e : loc.getWorld().getNearbyEntities(loc, 5, 2, 5))
-			if(e instanceof Creature)
-				result.add((Creature)e);
-		return result;
-	} 
-	
-	private void updateTargets(List<Creature> newTargets)
-	{
-		for(Creature c : newTargets)
+		for(LivingEntity c : newTargets)
 			c.setGlowing(true);
 		
-		for(Creature c : Targets)
+		for(LivingEntity c : Targets)
 			if(!newTargets.contains(c))
 				c.setGlowing(false);
 		
@@ -124,10 +120,10 @@ public class TrajectorySelector extends Selector implements Runnable
 		if(Targets.size() == 0)
 			return;
 		
-		for(Creature c : Targets)
+		for(LivingEntity c : Targets)
 			c.setGlowing(false);
 		
-		Targets = new LinkedList<Creature>();
+		Targets = new LinkedList<LivingEntity>();
 		Green = 1;
 		Blue = 1;
 	}

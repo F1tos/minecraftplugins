@@ -1,17 +1,19 @@
 package com.gmail.fitostpm.spellbook.tasks;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Arrays;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_11_R1.entity.CraftPlayer;
-import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
+
+import com.gmail.fitostpm.spellbook.util.CollectionsHelper;
+import com.gmail.fitostpm.spellbook.util.EntitySelector;
 
 import net.minecraft.server.v1_11_R1.EnumParticle;
 import net.minecraft.server.v1_11_R1.PacketPlayOutWorldParticles;
@@ -39,7 +41,8 @@ public class FireballDirector implements Runnable
 		CurVelocity.add(Gravity);
 		drawSphere(CurLoc, 0.3);		
 		
-		if(!(getNearbyCreatures(CurLoc, 0.5, 0.5, 0.5).size() == 0 && CurLoc.getBlock().getType().equals(Material.AIR)))
+		if(EntitySelector.getNearbyEntities(CurLoc, LivingEntity.class, .5, .5, .5, Arrays.asList(Caster)).size() == 0
+				&& CurLoc.getBlock().getType().equals(Material.AIR))
 		{
 			damageNearbyCreatures(CurLoc, 5, 2, 5, 5, Caster);
 			CurLoc.getWorld().playSound(CurLoc, Sound.ENTITY_GENERIC_EXPLODE, 1, 1);
@@ -82,17 +85,10 @@ public class FireballDirector implements Runnable
 	
 	private void damageNearbyCreatures(Location loc, double dx, double dy, double dz, double damage, Entity source)
 	{
-		for(Creature c : getNearbyCreatures(loc, dx, dy, dz))
-			c.damage(damage, source);
+		for(LivingEntity l : CollectionsHelper
+				.ConvertAll(EntitySelector
+				.getNearbyEntities(loc, LivingEntity.class, .5, .5, .5, Arrays.asList(Caster))
+				, x -> { return (LivingEntity)x; }))
+			l.damage(damage, source);
 	}
-	
-	private List<Creature> getNearbyCreatures(Location loc, double dx, double dy, double dz)
-	{
-		List<Creature> result = new LinkedList<Creature>();
-		for(Entity e : loc.getWorld().getNearbyEntities(loc, dx, dy, dz))
-			if(e instanceof Creature && !e.equals(Caster))
-				result.add((Creature)e);
-		return result;
-	} 
-
 }
