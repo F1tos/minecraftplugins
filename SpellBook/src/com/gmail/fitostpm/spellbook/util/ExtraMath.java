@@ -1,6 +1,7 @@
 package com.gmail.fitostpm.spellbook.util;
 
 import org.bukkit.entity.Entity;
+import org.bukkit.util.Vector;
 
 public class ExtraMath 
 {
@@ -20,6 +21,13 @@ public class ExtraMath
 		double y = target.getLocation().getY() - entity.getLocation().getY();
 		double distance = entity.getLocation().distance(target.getLocation());
 		return Math.toDegrees(Math.acos(y/distance)) - 90;
+	}
+	
+	public static Vector getVectorOutOfYawAndPitch(Entity entity)
+	{
+		double yaw = ((entity.getLocation().getYaw() + 90) * Math.PI) / 180;
+		double pitch = ((entity.getLocation().getPitch() + 90) * Math.PI) / 180;
+		return new Vector(Math.sin(pitch)*Math.cos(yaw), Math.cos(pitch), Math.sin(pitch)*Math.sin(yaw));
 	}
 
 }

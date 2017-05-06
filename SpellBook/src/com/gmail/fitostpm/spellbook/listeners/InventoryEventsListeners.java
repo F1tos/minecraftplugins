@@ -1,6 +1,5 @@
 package com.gmail.fitostpm.spellbook.listeners;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,10 +10,11 @@ import org.bukkit.inventory.ItemStack;
 
 import com.gmail.fitostpm.spellbook.MainClass;
 import com.gmail.fitostpm.spellbook.spells.EnumSpell;
-import com.gmail.fitostpm.spellbook.spells.PointTargetSpell;
+import com.gmail.fitostpm.spellbook.spells.TrajectoryMissileSpell;
 import com.gmail.fitostpm.spellbook.spells.Spell;
 import com.gmail.fitostpm.spellbook.spells.UnitTargetSpell;
 import com.gmail.fitostpm.spellbook.targets.Target;
+import com.gmail.fitostpm.spellbook.tasks.SelfCancelTaskScheduler;
 import com.gmail.fitostpm.spellbook.tasks.TargetSelector;
 import com.gmail.fitostpm.spellbook.tasks.TrajectorySelector;
 
@@ -60,16 +60,16 @@ public class InventoryEventsListeners implements Listener
 								playerYaw += 360;
 							TargetSelector ts = new TargetSelector(player, targets,
 									getLowestYawDifference(targets, playerYaw), utspell);
-							ts.setTaskId(Bukkit.getScheduler().scheduleSyncRepeatingTask(MainClass.Instance, ts, 0, 1));
+							SelfCancelTaskScheduler.ScheduleRepeatingTask(MainClass.Instance, ts, 0, 1);
 							MainClass.CastingPlayers.put(player, ts);
 						}						
 					}					
 				}
-				else if(spell instanceof PointTargetSpell)
+				else if(spell instanceof TrajectoryMissileSpell)
 				{
-					PointTargetSpell ptspell = (PointTargetSpell) spell;
+					TrajectoryMissileSpell ptspell = (TrajectoryMissileSpell) spell;
 					TrajectorySelector ts = new TrajectorySelector(player, ptspell);
-					ts.setTaskId(Bukkit.getScheduler().scheduleSyncRepeatingTask(MainClass.Instance, ts, 0, 1));
+					SelfCancelTaskScheduler.ScheduleRepeatingTask(MainClass.Instance, ts, 0, 1);
 					MainClass.CastingPlayers.put(player, ts);
 				}
 			}

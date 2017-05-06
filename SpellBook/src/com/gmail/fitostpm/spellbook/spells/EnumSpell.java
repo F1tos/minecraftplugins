@@ -13,7 +13,8 @@ public enum EnumSpell
 	LIGHTNING_STRIKE(7, "lightning", "Lightning Strike", new LightningStrikeSpell()),
 	POWER(8, "power", "Power", new PowerSpell()),
 	REGENERATION(9, "regen", "Regeneration", new RegenerationSpell()),
-	FIREBALL(10, "fireball", "Fireball", new FireballSpell());
+	FIREBALL(10, "fireball", "Fireball", new FireballSpell()),
+	FIREWORK(11, "firework", "Magic Firework", new MagicFireworkSpell());
 
 	private final int Id;
 	private final String TagName;

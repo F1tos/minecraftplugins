@@ -22,5 +22,4 @@ public class CollectionsHelper
 			result.add(conversion.apply(elem));
 		return result;
 	}
-
 }

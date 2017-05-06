@@ -1,6 +1,5 @@
 package com.gmail.fitostpm.spellbook.tasks;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_11_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
@@ -10,12 +9,13 @@ import org.bukkit.potion.PotionEffectType;
 import com.gmail.fitostpm.spellbook.MainClass;
 import com.gmail.fitostpm.spellbook.spells.UnitTargetSpell;
 import com.gmail.fitostpm.spellbook.targets.Target;
+import com.gmail.fitostpm.spellbook.util.ExtraMath;
 
 import net.minecraft.server.v1_11_R1.ChatComponentText;
 import net.minecraft.server.v1_11_R1.PacketPlayOutChat;
 import net.minecraft.server.v1_11_R1.PacketPlayOutTitle;
 
-public class TargetSelector extends Selector implements Runnable 
+public class TargetSelector extends Selector 
 {
 	private Player Caster;
 	private Target[] Targets;
@@ -41,8 +41,8 @@ public class TargetSelector extends Selector implements Runnable
 
 		for(int i = 0; i < Targets.length; i++)
 		{
-			Targets[i].yaw = Target.getYawToTarget(Caster, Targets[i].entity);
-			Targets[i].pitch = Target.getPitchToTarget(Caster, Targets[i].entity);
+			Targets[i].yaw = ExtraMath.getYawToTarget(Caster, Targets[i].entity);
+			Targets[i].pitch = ExtraMath.getPitchToTarget(Caster, Targets[i].entity);
 			if(i == CurrentTargetIndex)
 				Targets[i].entity.setGlowing(true);
 			else
@@ -78,7 +78,7 @@ public class TargetSelector extends Selector implements Runnable
 		((CraftPlayer)Caster).getHandle().playerConnection.sendPacket(new PacketPlayOutChat(
 				new ChatComponentText(""), (byte)2));
 		MainClass.CastingPlayers.remove(Caster);
-		Bukkit.getScheduler().cancelTask(getTaskId());	
+		Cancel();
 	}
 	
 	public void PrevTarget()
